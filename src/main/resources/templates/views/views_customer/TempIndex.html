@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+        
+        <title>Pagina principal</title>
+        
+        <style>
+            .custom-btn {
+                font-family: "Montserrat", sans-serif !important;
+                font-size: .8em;
+                display: inline-block;
+                padding: 10px 20px;
+                border: 2px solid rgb(34, 41, 61, .2) !important; /* Color suave para el borde */
+                background-color: white; /* Fondo blanco */
+                color: #22293d !important; /* Color del texto */
+                text-decoration: none;
+                border-radius: 50px !important; /* Bordes redondeados */
+                transition: background-color 0.3s, color 0.3s; /* Transición suave */
+            }
+    
+            .custom-btn:hover {
+                background-color: rgb(34, 41, 61, .6) !important; /* Color de fondo al pasar el cursor */
+                color: white !important; /* Color del texto al pasar el cursor */
+            }
+        </style>
+    </head>
+    <body id="page-top">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul th:replace="~{layout/principal :: navbar}"></ul>
+            <!-- End of Sidebar -->    
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav th:replace="~{layout/principal :: topbar('Buscar por cliente','customer_by_name','/customer/search')}"></nav>
+                        
+                    <div class="container">
+                        <!-- Page Heading -->
+                            <div class="d-flex align-items-center my-4 mx-3">
+                                <h1 class="h3 mb-2 text-gray-800 d-inline">LISTA DE CLIENTES</h1>
+    
+                                <a href="/customer/register" class="btn custom-btn d-inline ml-4">
+                                    <span class="text">Agregar Cliente</span>
+                                </a>
+                            </div>
+             
+                        <!-- DataTales Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>DNI</th>
+                                                    <th>NOMBRE</th>
+                                                    <th>APELLIDO</th>
+                                                    <th>TELEFONO</th>
+                                                    <th>ACCIONES</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="customer : ${customers}">
+                                                    <td th:text="${customer.idCustomer}"></td>
+                                                    <td th:text="${customer.customerDNI}"></td>
+                                                    <td th:text="${customer.customerName}"></td>
+                                                    <td th:text="${customer.customerLastName}"></td>
+                                                    <td th:text="${customer.customerPhone}" ></td>
+                                                    <td class="d-flex">
+                                                        <a class="btn btn-primary" th:href="@{'/customer/edit/' + ${customer.idCustomer} }">Editar</a>
+                                                        <form th:action="@{'/customer/delete/' + ${customer.idCustomer} }" method="post">
+                                                            <button type="submit" class="btn btn-danger ml-3">Eliminar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div> 
+            </div>	  
+        </div>
+        <!-- <th:block th:replace="layout/principal :: scripts"></th:block> -->
+    </body>
+</html>

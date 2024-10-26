@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:include="~{layout/principal.html :: headerfiles}"></th:block>
+
+        <title>Registrar Cliente</title>
+
+        <style>
+            #FormContainer h1 {
+                padding-top: 15px;
+                font-family: "Lexend", sans-serif !important;
+            }
+
+            .container {
+                border: none !important;
+            }
+
+            .card-form-id {
+                border-radius: 20px;
+                overflow: hidden;
+
+            }
+
+            .card-form-id > .card-form-id-img {
+                position: relative;
+                z-index: 100;
+                width: 100%;
+                height: 200px;
+                background-size: cover; 
+                background-position: center;
+            }
+
+            .card-form-id:nth-child(1) > .card-form-id-img {
+                background-image: url('https://img.freepik.com/vector-premium/concepto-tarjeta-identificacion-hombre-empleado-cedula-identidad_53562-8916.jpg'); 
+            }
+            
+            .card-form-id:nth-child(2) > .card-form-id-img {
+                background-image: url('https://static.vecteezy.com/system/resources/previews/014/213/443/non_2x/old-stationary-phone-in-cartoon-style-all-elements-are-isolated-vector.jpg'); 
+            }
+            
+            .card-form-id:nth-child(3) > .card-form-id-img {
+                background-image: url('https://aelis.es/wp-content/uploads/2023/10/tipos-de-usuarios-de-sage-live-2.jpg'); 
+            }
+
+            .card-form-id input {
+                border: none !important;
+                border-radius: none !important;
+                border-bottom: 1px solid #867b7b !important;
+                background-color: transparent;
+                outline: none !important;
+                padding: 10px;
+                width: 100%;
+                font-size: 1em;
+                /* font-family: "Montserrat", sans-serif !important; */
+            }
+            
+            .card-form-id > .card-form-id-img::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100px;
+                z-index: 200;
+                background-position: center;
+                background-color: white;
+                clip-path: ellipse(52% 42% at 49% 100%);
+                bottom: 0;
+            }
+            
+            .profile-custom {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                height: 400px;
+                margin-bottom: 50px;
+                /* border-radius: 30px !important; */
+                /* overflow: hidden; */
+                /* background-color: #867b7b; */
+            }
+            
+            
+            .profile-custom-choose {
+                width: 50%;
+                height: max-content;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin-right: 30px;
+                border-radius: 20px;
+                padding: 10px;
+            }
+
+            .profile-custom-choose img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .profile-custom-choose input {
+                /* display: none; */
+                width: 100%;
+                padding: 10px 5px;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid #867b7b;
+            }
+
+            .profile-custom-choose button {
+                /* display: none; */
+                padding: 10px 15px;
+                outline: none;
+                border: none;
+                margin-top: 10px;
+                transition: all 0.3s;
+            }
+
+            .profile-custom-choose button:hover {
+                /* display: none; */
+                border-radius: 20px;
+                background-color: #161a25;
+                color: #fff;
+            }
+
+
+            .profile-custom-view {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px solid #ccc;
+                border-radius: 20px;
+                padding: 10px;
+            }
+
+        </style>
+    </head>
+    <body id="page-top"> 
+        <div id="wrapper"> 
+            <ul th:replace="~{layout/principal :: navbar}"></ul>
+            
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav th:replace="~{layout/principal :: topbar('Buscar por nombre del empleado','employee_by_name','/employee/search')}"></nav>
+                        <div class="container">
+                            <div class="row">
+                                <div id="FormContainer" class="col-lg-6 col-md-6 col-sm-6 w-100 container justify-content-center card">
+                                    <br>
+                                    <h1 class="text-center">REGISTRAR</h1>
+                                    <div class="card-body">
+                                        <form 
+                                            th:action="@{/employee/save_employee}" 
+                                            th:object="${employee}"
+                                            method="post"
+                                            enctype="multipart/form-data"
+                                        >
+                                        <div class="d-flex">
+                                            <div class="form-group flex-grow-1 mr-2">
+                                                <label>Nombre</label> 
+                                                <input 
+                                                    type="text"
+                                                    th:field="*{employeeName}"
+                                                    class="form-control" 
+                                                    placeholder="Nombre completo"
+                                                    value="Mathias"
+                                                >
+                                            </div>
+                                            <div class="form-group flex-grow-1">
+                                                <label>Apellido</label> 
+                                                <input 
+                                                    type="text"
+                                                    name="apellidoEmpleado" 
+                                                    th:field="*{employeeLastName}"
+                                                    class="form-control" 
+                                                    placeholder="Apellido completo"
+                                                    value="Gonzalez"
+                                                >
+                                            </div>
+                                        </div>
+                                            <div class="d-flex">
+                                                <div class="form-group flex-grow-1 mr-2">
+                                                    <label>Correo electronico</label> 
+                                                    <input 
+                                                        type="text"
+                                                        name="correoEmpleado" 
+                                                        th:field="*{employeeEmail}"
+                                                        class="form-control" 
+                                                        placeholder="Correo electronico personal"
+                                                        value="mathiasalayo@gmail.com"
+                                                    >
+                                                </div>
+                                                <div class="form-group flex-grow-1">
+                                                    <label>Direccion</label> 
+                                                    <input 
+                                                        type="text"
+                                                        name="direccionEmpleado"
+                                                        th:field="*{employeeAddress}"
+                                                        class="form-control" 
+                                                        placeholder="Direccion exacta"
+                                                        value="Jr Perlas 2743"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="form-group flex-grow-1 mr-2">
+                                                    <label>Usuario</label> 
+                                                    <input 
+                                                        type="text"
+                                                        name="correoEmpleado" 
+                                                        th:field="*{employeeUserName}"
+                                                        class="form-control" 
+                                                        placeholder="Nombre de usuario"
+                                                        value="mathiasalayo"
+                                                    >
+                                                </div>
+                                                <div class="form-group flex-grow-1">
+                                                    <label>Contraseña</label> 
+                                                    <input 
+                                                        type="text"
+                                                        name="direccionEmpleado"
+                                                        th:field="*{employeeUserPassword}"
+                                                        class="form-control" 
+                                                        placeholder="Contraseña del usuario"
+                                                        value="123456"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+
+                                                <div class="form-group flex-grow-1 mr-2 card-form-id">
+                                                    <div class="card-form-id-img">
+                                                    </div>
+                                                    <div>
+                                                        <input 
+                                                            type="text" 
+                                                            name="dniEmpleado"
+                                                            th:field="*{employeeDNI}" 
+                                                            placeholder="Digite el dni"
+                                                            value="76211321"
+                                                        >
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div class="form-group flex-grow-1 mr-2 card-form-id">
+                                                    <div class="card-form-id-img">
+                                                    </div>
+                                                    <div>
+                                                        <input 
+                                                            type="text"
+                                                            name="telefonoEmpleado" 
+                                                            th:field="*{employeePhone}"
+                                                            class="form-control" 
+                                                            placeholder="Brinde el telefono movil"
+                                                            value="987654321"
+                                                        >
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group flex-grow-1 mr-2 card-form-id">
+                                                    <div class="card-form-id-img">
+                                                    </div>
+                                                    <div>
+                                                        <input 
+                                                            type="text"
+                                                            name="tipoUsuario" 
+                                                            th:field="*{employeeUserType}"
+                                                            class="form-control" 
+                                                            placeholder="Que tipo de usuario es?"
+                                                            value="Empleado"
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-custom">
+                                                <div class="profile-custom-choose">
+
+                                                    <h1>Coloca la foto!</h1>
+
+                                                    <input type="url" th:field="*{employeeUserProfile}" placeholder="Pega la URL de la foto que desees!">
+
+                                                    <button type="button">Subir Imagen</button>
+
+                                                    <img src="https://img.freepik.com/vector-premium/nino-dibujos-animados-tomando-foto_29937-10897.jpg" alt="" srcset="">
+                                                </div>
+                                                <div class="profile-custom-view">
+                                                    <img src="" height="100%">
+                                                </div>
+                                            </div>
+
+                                            <div class="box-footer d-flex ">
+                                                <button type="submit" class="btn w-100 border-1 border-warning mr-2">Guardar</button>
+                                                <div>
+                                                    <a th:href="@{/employee/list}" class="btn btn-danger">
+                                                        Volver 
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div> 
+            </div>	
+        </div>
+
+        <script>
+
+
+            document.querySelector('.profile-custom-choose > button').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                console.log("Funcionando");
+                let url = document.querySelector('input[type="url"]').value;
+                document.querySelector('.profile-custom-view img').src = url;
+            });
+
+        </script>
+        <!-- <th:block th:include="~{layout/principal.html :: scripts}"></th:block> -->
+    </body>
+</html>

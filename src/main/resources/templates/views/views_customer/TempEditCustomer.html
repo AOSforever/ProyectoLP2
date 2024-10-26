@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+
+    <title>Vista de edicion de cliente</title>
+
+</head>
+    <body id="page-top">
+        <div id="wrapper">
+            <ul th:replace="layout/principal :: navbar"></ul>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav th:replace="~{layout/principal :: topbar('Buscar por cliente','customer_by_name','/customer/search')}"></nav>
+                    
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card  rounded-5 py-4">
+                                <br>
+                                <h1 class="text-center">Apartado de Edición</h1>
+                                <div class="card-body">
+                                    <form th:action="@{'/customer/save_customer'}" method="post" th:object="${customer}">
+                                        <input type="hidden"/>
+                                        <div class="form-group">
+                                            <label>Codigo del cliente</label>
+                                            <input 
+                                                type="text"
+                                                name="codCliente" 
+                                                class="form-control" 
+                                                readonly="readonly"
+                                                th:field="*{idCustomer}"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre : </label>
+                                            <input 
+                                                type="text"
+                                                name="nombreCliente" 
+                                                class="form-control" 
+                                                placeholder="Digite el nombre"
+                                                th:field="*{customerName}"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Apellido : </label>
+                                            <input 
+                                                type="text"
+                                                name="apellidoCliente" 
+                                                class="form-control" 
+                                                placeholder="Digite el apellido"
+                                                th:field="*{customerLastName}"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-around">
+                                                <div class="w-100 mr-2">
+                                                    <label>DNI del cliente</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="dniCliente"
+                                                        class="form-control w-100"
+                                                        placeholder="Digite el dni"
+                                                        th:field="*{customerDNI}"
+                                                    >
+                                                </div>
+                                                <div class="w-100">
+                                                    <label>Telefono</label>
+                                                    <input 
+                                                        type="text" 
+                                                        name="dniCliente"
+                                                        class="form-control w-100"
+                                                        placeholder="Editar numero de telefono"
+                                                        th:field="*{customerPhone}"
+                                                    >
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="box-footer d-flex ">
+                                            <button type="submit" class="btn w-100 border-1 border-warning mr-2">Guardar</button>
+                                            <div>
+                                                <a th:href="@{/customer/list}" class="btn btn-danger">
+                                                    Volver 
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>	
+            </div>
+        </div>
+        <!-- <th:block th:include="~{layout/principal.html :: scripts}"> ... </th:block> -->
+    </body>
+</html>
