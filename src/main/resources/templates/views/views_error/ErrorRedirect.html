@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit&family=Plus+Jakarta+Sans:ital,wght@0,235;1,235&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit&family=Plus+Jakarta+Sans:ital,wght@0,200;1,200&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+        <title>Error Page</title>
+
+        <style>
+
+            * {
+                color: #fff !important;
+            }
+            
+            html, body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                background-color: #161a25;
+                height: 100%;
+                font-family: "Outfit", serif;
+                font-optical-sizing: auto;
+                font-weight: 100;
+                font-style: normal;
+            }
+
+            .container {
+                text-align: center;
+                padding: 50px;
+                border-radius: 10px;
+                /* background-color: #2c2f3e; */
+                /* height: 100%; */
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+                transition: all .5s;
+            }
+            
+            .container:hover {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            h1 {
+            }
+
+            p {
+                color: #ff0000;
+            }
+
+            span {
+                font-family: "Source Code Pro", monospace !important;
+                background-color: aliceblue;
+                color: #211010;
+                border-radius: 20px;
+                padding: 0 10px;
+                margin: 10px;
+                font-size: 20px;
+            }
+
+            .container_msg {
+                padding: 30px;
+                border-radius: 20px;
+                background-color: #22293d;
+                color: #fff;
+            }
+
+            .container_msg > a {
+                position: relative;
+                text-decoration: none;
+                background-color: #d3d5d8;
+                color: #000 !important; 
+                border-radius: 10px;
+                transform: translateY(-20px);
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>
+                PARECE QUE NO EXISTE UNA PÁGINA
+            </h1>
+            <code th:text="${error_message}"></code>
+            <p th:text="${error_path}"></p>
+
+            <div class="container_msg">
+                <p>
+                    Si te encuentras en la ruta principal (/) u otra diferente, por favor
+                </p>
+
+                <a th:href="@{/customer/list}">Click aquí para redireccionar</a>
+            </div>
+        </div>
+    </body>
+</html>

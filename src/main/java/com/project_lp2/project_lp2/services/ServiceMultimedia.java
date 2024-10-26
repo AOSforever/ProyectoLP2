@@ -15,22 +15,23 @@ public class ServiceMultimedia {
     public byte[] serv_convert_image_URL(String imagePath) throws IOException {
         byte[] imageBytes = null;
 
-        URL url_image = new URL( imagePath );
+        if( imagePath != null ) {
+            URL url_image = new URL( imagePath );
 
-        URLConnection conexion = url_image.openConnection();
-
-        try (InputStream inputStream = conexion.getInputStream()) {
-
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int longitud;
-            while ((longitud = inputStream.read( buffer )) != -1) {
-                outputStream.write(buffer, 0, longitud);
-            }
-            
-            imageBytes = outputStream.toByteArray();
-        } catch ( Exception ex ) { ex.printStackTrace(); } 
-
+            URLConnection conexion = url_image.openConnection();
+    
+            try (InputStream inputStream = conexion.getInputStream()) {
+    
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int longitud;
+                while ((longitud = inputStream.read( buffer )) != -1) {
+                    outputStream.write(buffer, 0, longitud);
+                }
+                
+                imageBytes = outputStream.toByteArray();
+            } catch ( Exception ex ) { ex.printStackTrace(); } 
+        } else return imageBytes;
         return imageBytes;
     }
 

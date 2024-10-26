@@ -32,7 +32,7 @@ public class ControllerCustomer {
 
 		model.addAttribute("customers", service.serv_list_customer() );
 
-		return "/views/views_customer/TempIndex";
+		return "/views/views_customer/TempIndexCustomer";
 	}
 	
 	@GetMapping("/register")
@@ -76,7 +76,7 @@ public class ControllerCustomer {
 		model.addAttribute("customers", service.serv_getByName_customer( customerName ) );
 		model.addAttribute("static_text", customerName);
 
-		return "views/views_customer/TempIndex";
+		return "views/views_customer/TempIndexCustomer";
 	}
 	
 

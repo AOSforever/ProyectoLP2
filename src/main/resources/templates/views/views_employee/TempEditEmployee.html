@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <th:block th:include="~{layout/principal.html :: headerfiles}"></th:block>
-        <title>Registrar Empleado</title>
+        <title>Vista de edicion del Empleado</title>
     </head>
     <body id="page-top"> 
         <div id="wrapper"> 
@@ -23,6 +23,17 @@
                                             method="post"
                                             enctype="multipart/form-data"
                                         >
+                                        <div class="form-group" style="position: absolute; top: 0;">
+                                            <label>ID del empleado</label> 
+                                            <input 
+                                                type="text"
+                                                th:field="*{idEmployee}"
+                                                class="form-control" 
+                                                readonly
+                                                placeholder="Id del empleado"
+                                                value="1"
+                                            >
+                                        </div>
                                         <div class="d-flex">
                                             <div class="form-group flex-grow-1 mr-2">
                                                 <label>Nombre</label> 
@@ -31,7 +42,6 @@
                                                     th:field="*{employeeName}"
                                                     class="form-control" 
                                                     placeholder="Nombre completo"
-                                                    value="Mathias"
                                                 >
                                             </div>
                                             <div class="form-group flex-grow-1">
@@ -147,14 +157,14 @@
 
                                                     <h1>Coloca la foto!</h1>
 
-                                                    <input type="url" th:field="*{employeeUserProfile}" placeholder="Pega la URL de la foto que desees!">
+                                                    <input type="url" placeholder="Pega la URL de la foto que desees!">
 
                                                     <button type="button">Subir Imagen</button>
 
                                                     <img src="https://img.freepik.com/vector-premium/nino-dibujos-animados-tomando-foto_29937-10897.jpg" alt="" srcset="">
                                                 </div>
                                                 <div class="profile-custom-view">
-                                                    <img src="" height="100%">
+                                                    <img th:src="*{employeeUserProfile}" height="100%">
                                                 </div>
                                             </div>
 

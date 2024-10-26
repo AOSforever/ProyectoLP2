@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+    <title>Vista del Proveedor</title>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <ul th:replace="~{layout/principal :: navbar}"></ul>
+        
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav th:replace="~{layout/principal :: topbar('Buscar por nombre del proveedor','supplier_by_name','/supplier/search')}"></nav>
+                
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center my-4 mx-3">
+                        <h1 class="h3 mb-2 text-gray-800 d-inline">LISTA DE PROVEEDORES</h1>
+
+                        <a href="/supplier/register" class="btn custom-btn d-inline ml-4">
+                            <span class="text">Agregar nuevo proveedor</span>
+                        </a>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>RUC</th>
+                                            <th>NOMBRE</th>
+                                            <th>TELEFONO</th>
+                                            <th>DIRECCION</th>
+                                            <th>WEB</th>
+                                            <th>ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="supplier : ${suppliers}">
+                                            <td th:text="${supplier.idSupplier}"></td>
+                                            <td th:text="${supplier.supplierRUC}"></td>
+                                            <td th:text="${supplier.supplierName}"></td>
+                                            <td th:text="${supplier.supplierPhone}"></td>
+                                            <td th:text="${supplier.supplierAddress}"></td>
+                                            <td th:text="${supplier.supplierWebLink}"></td>
+                                            <td class="d-flex">
+                                                <div class="mr-2">
+                                                    <a th:href="@{'/supplier/edit/' + ${supplier.idSupplier}}" class="btn btn-primary btn-circle btn-sm">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <form th:action="@{'/supplier/delete/' + ${supplier.idSupplier}}" method="post">
+                                                        <button class="btn btn-danger btn-circle btn-sm" type="submit">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>	
+    </div> 
+    <!-- <th:block th:replace="layout/principal :: scripts"></th:block> -->
+</body>
+</html>

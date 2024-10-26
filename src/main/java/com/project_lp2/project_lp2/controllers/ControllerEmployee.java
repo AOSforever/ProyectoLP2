@@ -2,7 +2,6 @@ package com.project_lp2.project_lp2.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/employee")
 public class ControllerEmployee {
 
-    private ServiceMultimedia service_mul = new ServiceMultimedia();
-
     @Autowired
     private ServiceEmployee service;
 
@@ -35,26 +32,13 @@ public class ControllerEmployee {
         ArrayList<DTOModelEmployee> ls_models_dtos = new ArrayList<>();
 
         for( ModelEmployee employee : service.serv_list_employee() ) {
-            DTOModelEmployee dto_employee = DTOModelEmployee.builder()
-                .idEmployee( employee.getIdEmployee() )
-                .employeeDNI( employee.getEmployeeDNI() )
-                .employeeName( employee.getEmployeeName() )
-                .employeeLastName( employee.getEmployeeLastName() )
-                .employeePhone( employee.getEmployeePhone() )
-                .employeeEmail( employee.getEmployeeEmail() )
-                .employeeAddress( employee.getEmployeeAddress() )
-                .employeeUserType( employee.getEmployeeUserType() )
-                .employeeUserName( employee.getEmployeeUserName() )
-                .employeeUserPassword( employee.getEmployeeUserPassword() )
-                .employeeUserProfile( service_mul.serv_convert_base_image( employee.getEmployeeUserProfile(), "jpg") )
-                .build();
-
+            DTOModelEmployee dto_employee = service.serv_builder_dto_employee(employee);
             ls_models_dtos.add( dto_employee );
         }
 
         model.addAttribute("employees", ls_models_dtos );
 
-        return "views/views_employee/TempIndex";
+        return "views/views_employee/TempIndexEmployee";
     }
 
     @GetMapping("/register")
@@ -68,21 +52,7 @@ public class ControllerEmployee {
     @PostMapping("/save_employee")  
     public String ctr_save_employee(@ModelAttribute DTOModelEmployee dto_employee) throws IOException {
 
-        byte[] bytes_image = service_mul.serv_convert_image_URL( dto_employee.getEmployeeUserProfile() );
-
-        ModelEmployee employee = ModelEmployee.builder()
-            .employeeDNI( dto_employee.getEmployeeDNI() )
-            .employeeName( dto_employee.getEmployeeName() )
-            .employeeLastName( dto_employee.getEmployeeLastName() )
-            .employeePhone( dto_employee.getEmployeePhone() )
-            .employeeEmail( dto_employee.getEmployeeEmail() )
-            .employeeAddress( dto_employee.getEmployeeAddress() )
-            .employeeUserType( dto_employee.getEmployeeUserType() )
-            .employeeUserName( dto_employee.getEmployeeUserName() )
-            .employeeUserPassword( dto_employee.getEmployeeUserPassword() )
-            .employeeUserProfile( bytes_image )
-            .build();
-        
+        ModelEmployee employee = service.serv_builder_model_employee(dto_employee);
         service.serv_create_update_employee( employee );
         
         return "redirect:/employee/list";
@@ -91,8 +61,11 @@ public class ControllerEmployee {
 
     @GetMapping("/edit/{id}")
     public String ctr_edit_employee(@PathVariable long id, Model model) {
+        ModelEmployee employee = service.serv_get_employee(id);
 
-        model.addAttribute("employee", service.serv_get_employee(id) );
+        DTOModelEmployee dto_employee = service.serv_builder_dto_employee(employee);
+
+        model.addAttribute("employee", dto_employee );
 
         return "views/views_employee/TempEditEmployee";
     }
@@ -108,9 +81,16 @@ public class ControllerEmployee {
     @GetMapping("/search")
     public String ctr_search_employee(@RequestParam(name = "employee_by_name") String employeeName, Model model) {
 
-        model.addAttribute("employees", service.serv_find_employee(employeeName) );
+        ArrayList<DTOModelEmployee> ls_models_dtos = new ArrayList<>();
+        
+        for( ModelEmployee employee : service.serv_find_employee(employeeName) ) {
+            DTOModelEmployee dto_employee = service.serv_builder_dto_employee(employee);
+            ls_models_dtos.add( dto_employee );
+        }
+
+        model.addAttribute("employees", ls_models_dtos );
         model.addAttribute("static_text", employeeName);
 
-        return "views/views_employee/TempIndex";
+        return "views/views_employee/TempIndexEmployee";
     }
 }

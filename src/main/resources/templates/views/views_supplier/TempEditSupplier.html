@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
-        <title>Vista de edicion del Cliente</title>
+        <title>Vista de edicion del Proveedor</title>
     </head>
     <body id="page-top">
         <div id="wrapper">
             <ul th:replace="layout/principal :: navbar"></ul>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
-                    <nav th:replace="~{layout/principal :: topbar('Buscar por cliente','customer_by_name','/customer/search')}"></nav>
+                    <nav th:replace="~{layout/principal :: topbar('Buscar por nombre del proveedor','supplier_by_name','/supplier/search')}"></nav>
                     
                     <div class="container">
                         <div class="row">
@@ -17,68 +17,70 @@
                                 <br>
                                 <h1 class="text-center">Apartado de Edición</h1>
                                 <div class="card-body">
-                                    <form th:action="@{'/customer/save_customer'}" method="post" th:object="${customer}">
+                                    <form th:action="@{'/supplier/save_supplier'}" method="post" th:object="${supplier}">
                                         <input type="hidden"/>
                                         <div class="form-group">
-                                            <label>Codigo del cliente</label>
+                                            <label>Codigo del proveedor</label>
                                             <input 
                                                 type="text"
-                                                name="codCliente" 
                                                 class="form-control" 
                                                 readonly="readonly"
-                                                th:field="*{idCustomer}"
+                                                th:field="*{idSupplier}"
                                             >
                                         </div>
                                         <div class="form-group">
-                                            <label>Nombre : </label>
+                                            <label>Nombre</label>
                                             <input 
                                                 type="text"
-                                                name="nombreCliente" 
                                                 class="form-control" 
-                                                placeholder="Digite el nombre"
-                                                th:field="*{customerName}"
+                                                placeholder="Nuevo nombre del proveedor"
+                                                th:field="*{supplierName}"
                                             >
                                         </div>
                                         <div class="form-group">
-                                            <label>Apellido : </label>
+                                            <label>RUC</label>
                                             <input 
                                                 type="text"
-                                                name="apellidoCliente" 
                                                 class="form-control" 
                                                 placeholder="Digite el apellido"
-                                                th:field="*{customerLastName}"
+                                                th:field="*{supplierRUC}"
                                             >
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex justify-content-around">
                                                 <div class="w-100 mr-2">
-                                                    <label>DNI del cliente</label>
-                                                    <input 
-                                                        type="text" 
-                                                        name="dniCliente"
-                                                        class="form-control w-100"
-                                                        placeholder="Digite el dni"
-                                                        th:field="*{customerDNI}"
-                                                    >
-                                                </div>
-                                                <div class="w-100">
                                                     <label>Telefono</label>
                                                     <input 
                                                         type="text" 
-                                                        name="dniCliente"
                                                         class="form-control w-100"
-                                                        placeholder="Editar numero de telefono"
-                                                        th:field="*{customerPhone}"
+                                                        placeholder="Digite el telefono"
+                                                        th:field="*{supplierPhone}"
                                                     >
                                                 </div>
-
-
+                                                <div class="w-100">
+                                                    <label>Dirección</label>
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control w-100"
+                                                        placeholder="Actualize la direccion"
+                                                        th:field="*{supplierAddress}"
+                                                    >
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="box-footer d-flex ">
+                                        <div class="w-100">
+                                            <label>Pagina Web Oficial</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control w-100"
+                                                placeholder="Enlace de la pagina"
+                                                th:field="*{supplierWebLink}"
+                                            >
+                                        </div>
+                                        <div class="box-footer d-flex mt-4">
                                             <button type="submit" class="btn w-100 border-1 border-warning mr-2">Guardar</button>
                                             <div>
-                                                <a th:href="@{/customer/list}" class="btn btn-danger">
+                                                <a th:href="@{/supplier/list}" class="btn btn-danger">
                                                     Volver 
                                                 </a>
                                             </div>

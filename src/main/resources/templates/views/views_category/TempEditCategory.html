@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+        <title>Vista de edicion de categoria</title>
+    </head>
+    <body id="page-top">
+        <div id="wrapper">
+            <ul th:replace="layout/principal :: navbar"></ul>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <nav th:replace="~{layout/principal :: topbar('Buscar por nombre de la categoria','category_by_name','/category/search')}"></nav>
+                    
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card  rounded-5 py-4">
+                                <br>
+                                <h1 class="text-center">Apartado de Edición</h1>
+                                <div class="card-body">
+                                    <form th:action="@{'/category/save_category'}" method="post" th:object="${category}">
+                                        <input type="hidden"/>
+                                        <div class="form-group">
+                                            <label>Codigo de la categoria</label>
+                                            <input 
+                                                type="text"
+                                                class="form-control" 
+                                                readonly="readonly"
+                                                th:field="*{idCategory}"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input 
+                                                type="text"
+                                                class="form-control" 
+                                                placeholder="Nuevo nombre de la categoria"
+                                                th:field="*{categoryName}"
+                                            >
+                                        </div>
+                                        <div class="box-footer d-flex mt-4">
+                                            <button type="submit" class="btn w-100 border-1 border-warning mr-2">Guardar</button>
+                                            <div>
+                                                <a th:href="@{/category/list}" class="btn btn-danger">
+                                                    Volver 
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>	
+            </div>
+        </div>
+        <!-- <th:block th:include="~{layout/principal.html :: scripts}"> ... </th:block> -->
+    </body>
+</html>

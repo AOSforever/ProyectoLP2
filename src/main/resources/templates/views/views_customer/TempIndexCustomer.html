@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
-        
+        <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>   
         <title>Pagina principal</title>
-        
-        <style>
-            .custom-btn {
-                font-family: "Montserrat", sans-serif !important;
-                font-size: .8em;
-                display: inline-block;
-                padding: 10px 20px;
-                border: 2px solid rgb(34, 41, 61, .2) !important; /* Color suave para el borde */
-                background-color: white; /* Fondo blanco */
-                color: #22293d !important; /* Color del texto */
-                text-decoration: none;
-                border-radius: 50px !important; /* Bordes redondeados */
-                transition: background-color 0.3s, color 0.3s; /* Transición suave */
-            }
-    
-            .custom-btn:hover {
-                background-color: rgb(34, 41, 61, .6) !important; /* Color de fondo al pasar el cursor */
-                color: white !important; /* Color del texto al pasar el cursor */
-            }
-        </style>
     </head>
     <body id="page-top">
         <div id="wrapper">
@@ -67,10 +46,18 @@
                                                     <td th:text="${customer.customerLastName}"></td>
                                                     <td th:text="${customer.customerPhone}" ></td>
                                                     <td class="d-flex">
-                                                        <a class="btn btn-primary" th:href="@{'/customer/edit/' + ${customer.idCustomer} }">Editar</a>
-                                                        <form th:action="@{'/customer/delete/' + ${customer.idCustomer} }" method="post">
-                                                            <button type="submit" class="btn btn-danger ml-3">Eliminar</button>
-                                                        </form>
+                                                        <div class="mr-2">
+                                                            <a th:href="@{'/customer/edit/' + ${customer.idCustomer}}" class="btn btn-primary btn-circle btn-sm">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <form th:action="@{'/customer/delete/' + ${customer.idCustomer}}" method="post">
+                                                                <button class="btn btn-danger btn-circle btn-sm" type="submit">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 

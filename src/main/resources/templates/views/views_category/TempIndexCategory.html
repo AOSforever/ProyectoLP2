@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+    <title>Vista de Categorias</title>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <ul th:replace="~{layout/principal :: navbar}"></ul>
+        
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav th:replace="~{layout/principal :: topbar('Buscar por nombre de la categoria','category_by_name','/category/search')}"></nav>
+                
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center my-4 mx-3">
+                        <h1 class="h3 mb-2 text-gray-800 d-inline">LISTA DE CATEGORIAS</h1>
+
+                        <a href="/category/register" class="btn custom-btn d-inline ml-4">
+                            <span class="text">Agregar nueva Categoria</span>
+                        </a>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>NOMBRE</th>
+                                            <th>ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="category : ${categories}">
+                                            <td th:text="${category.idCategory}"></td>
+                                            <td th:text="${category.categoryName}"></td>
+                                            <td class="d-flex">
+                                                <div class="mr-2">
+                                                    <a th:href="@{'/category/edit/' + ${category.idCategory}}" class="btn btn-primary btn-circle btn-sm">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <form th:action="@{'/category/delete/' + ${category.idCategory}}" method="post">
+                                                        <button class="btn btn-danger btn-circle btn-sm" type="submit">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>	
+    </div> 
+    <!-- <th:block th:replace="layout/principal :: scripts"></th:block> -->
+</body>
+</html>

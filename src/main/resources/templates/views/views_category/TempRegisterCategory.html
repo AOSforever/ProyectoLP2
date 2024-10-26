@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:include="~{layout/principal.html :: headerfiles}"> <!--...--> </th:block>
+		<title>Registro de Categorias</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Registrar Proveedor</a>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="/nuevo">Agregar producto</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<br>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card rounded-5 py-4">
+					<h1 class="text-center">Registrar Nueva Categoria</h1>
+					<div class="card-body">
+						<form 
+							method="post" 
+							th:object="${category}"
+							th:action="@{/category/save_category}"
+						>
+                            <div class="form-group">
+								<label>Nombre</label>
+								<input 
+									type="text" 
+									class="form-control" 
+									placeholder="Nombre de la categoria"
+									th:field="*{categoryName}"
+								>
+							</div>
+							
+							<div class="box-footer d-flex ">
+								<button type="submit" class="btn w-100 border-1 border-warning mr-2">Guardar</button>
+								<div>
+									<a th:href="@{/category/list}" class="btn btn-danger">
+										Volver 
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</body>
+</html>
