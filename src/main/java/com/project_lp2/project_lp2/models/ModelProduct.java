@@ -38,7 +38,7 @@ public class ModelProduct {
 
     @NotNull
     @Min(0)
-    @Column(name = "PROD_STOK_MAX", nullable = false)
+    @Column(name = "PROD_STOCK_MAX", nullable = false)
     private int prodStockMax;
 
     @NotNull

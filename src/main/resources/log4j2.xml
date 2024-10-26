@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG" monitorInterval="20">
+<Configuration status="ERROR" monitorInterval="20">
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
         <Property name="APP_LOG_ROOT">./logs</Property>
@@ -8,19 +8,45 @@
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}" />
         </Console>
+
+        <!-- Controller Employee - Log File -->
         <RollingFile 
                 name="fileControllerEmployee"
                 fileName="${APP_LOG_ROOT}/SpringBootLogApp/controllerEmployee.log"
-                filePattern="${APP_LOG_ROOT}/SpringBootApp/controllerEmployee-%d{yyyy-MM-dd}-%i.log">
+                filePattern="${APP_LOG_ROOT}/SpringBootLogApp/controllerEmployee-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
                 <SizeBasedTriggeringPolicy size="19500KB" />
             </Policies>
             <DefaultRolloverStrategy max="1" />
         </RollingFile>
+
+        <!-- Controller Customer - Log File -->
         <RollingFile name="fileControllerCustomer"
-                fileName="${APP_LOG_ROOT}/SpringBootApp/controllerCustomer.log"
-                filePattern="${APP_LOG_ROOT}/SpringBootApp/controllerCustomer-%d{yyyy-MM-dd}-%i.log">
+                fileName="${APP_LOG_ROOT}/SpringBootLogApp/controllerCustomer.log"
+                filePattern="${APP_LOG_ROOT}/SpringBootLogApp/controllerCustomer-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1" />
+        </RollingFile>
+
+        <!-- Controller Supplier - Log File -->
+        <RollingFile name="fileControllerSupplier"
+                fileName="${APP_LOG_ROOT}/SpringBootLogApp/controllerSupplier.log"
+                filePattern="${APP_LOG_ROOT}/SpringBootLogApp/controllerSupplier-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1" />
+        </RollingFile>
+
+        <!-- Controller Category - Log File -->
+        <RollingFile name="fileControllerCategory"
+                fileName="${APP_LOG_ROOT}/SpringBootLogApp/controllerCategory.log"
+                filePattern="${APP_LOG_ROOT}/SpringBootLogApp/controllerCategory-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
                 <SizeBasedTriggeringPolicy size="19500KB" />
@@ -29,15 +55,27 @@
         </RollingFile>
     </Appenders>
     <Loggers>
+        <!-- Logger Controller Package Path (ControllerEmployee) -->
         <Logger name="com.project_lp2.project_lp2.controllers.ControllerEmployee" level="info" additivity="false">
             <AppenderRef ref="fileControllerEmployee" />
             <AppenderRef ref="Console" />
         </Logger>
+        <!-- Logger Controller Package Path (ControllerCustomer)-->
         <Logger name="com.project_lp2.project_lp2.controllers.ControllerCustomer" level="info" additivity="false">
             <AppenderRef ref="fileControllerCustomer" />
             <AppenderRef ref="Console" />
         </Logger>
-        <Root level="debug">
+        <!-- Logger Controller Package Path (ControllerSupplier)-->
+        <Logger name="com.project_lp2.project_lp2.controllers.ControllerSupplier" level="info" additivity="false">
+            <AppenderRef ref="fileControllerSupplier" />
+            <AppenderRef ref="Console" />
+        </Logger>
+        <!-- Logger Controller Package Path (ControllerCategory)-->
+        <Logger name="com.project_lp2.project_lp2.controllers.ControllerCategory" level="info" additivity="false">
+            <AppenderRef ref="fileControllerCategory" />
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Root level="ERROR">
             <AppenderRef ref="Console" />
         </Root>
     </Loggers>
